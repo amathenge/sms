@@ -1,0 +1,22 @@
+{% macro nav(user,admin) -%}
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav001" aria-controls="nav001" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>      
+<div class="collapse navbar-collapse" id="nav001">
+    <div class="navbar-nav">
+    <a class="nav-item nav-link text-primary" href="{{ url_for('home') }}">Home</a>
+    {% if admin == 1 %}
+    <a class="nav-item nav-link text-primary" href="{{ url_for('staff') }}">Staff DB</a>
+    {% endif %}
+    <a class="nav-item nav-link text-primary" href="{{ url_for('contact') }}">Resident DB</a>
+    {% if admin == 1 %}
+    <a class="nav-item nav-link text-primary" href="{{ url_for('showlogs') }}">System Logs</a>
+    {% endif %}
+    </div>
+</div>
+<div class="navbar-nav navbar-right">
+    <a class="nav-item nav-link text-primary" href="{{ url_for('logout') }}">LOGOUT</a>
+</div>
+</nav>
+{%- endmacro %}

@@ -1,0 +1,243 @@
+{% from 'utils.j2' import nav %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1"/>
+
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <script>
+      function heyfrom(me) {
+        var tolist = document.querySelector("#outList");
+        // var item = document.querySelector("#inList").value;
+        // var idx = document.querySelector("#inList").selectedIndex;
+        var idx = me.selectedIndex;
+        var txt = me.options[idx].text;
+        var item = me.options[idx].value;
+        var options = document.querySelector("#outList").options;
+        var found = false;
+
+
+        for (var counter=0; counter < options.length; counter++) {
+          if (options[counter].value == item) {
+            found = true;
+          }
+        }
+
+
+        if (!found) {
+          // let newOption = new Option(item, txt);
+          let newOption = document.createElement('option');
+          newOption.value = item;
+          newOption.text = txt;
+          tolist.add(newOption, undefined);
+        }
+      }
+
+
+      function heyto(me) {
+        me.remove(me.selectedIndex);
+      }
+
+
+      function fromcontact(me) {
+        var tolist = document.querySelector("#outList");
+        var idx = me.selectedIndex;
+        var item = me.options[idx].value;
+        var txt = me.options[idx].text;
+        var options = document.querySelector("#outList").options;
+        var found = false;
+
+
+        for (var counter=0; counter < options.length; counter++) {
+          if (options[counter].value == item) {
+            found = true;
+          }
+        }
+
+
+        if (!found) {
+          let newOption = document.createElement('option');
+          newOption.value = item;
+          newOption.text = txt;
+          tolist.add(newOption, undefined);
+        }
+      }
+
+
+      function getList() {
+        var theList = document.querySelector("#outList");
+        for (counter=0; counter<theList.options.length; counter++) {
+          theList.options[counter].selected = true;
+        }
+
+
+        return true;
+      }
+
+
+      function messageLen() {
+        var txt = document.querySelector("#txtMessage");
+        var mlen = txt.value.length;
+        var msg = document.querySelector("#msgLen")
+        msg.innerHTML = mlen.toString()
+      }
+
+
+      function addItem() {
+        var inList = document.querySelector("#inList");
+        var outList = document.querySelector("#outList");
+        var idx = inList.selectedIndex;
+        var item = inList.options[idx].value;
+        var txt = inList.options[idx].text;
+        var found = false;
+
+
+        for (var counter=0; counter < outList.options.length; counter++) {
+          if (outList.options[counter].value == item) {
+            found = true;
+          }
+        }
+
+
+        if (!found) {
+          let newOption = document.createElement('option');
+          newOption.value = item;
+          newOption.text = txt;
+          outList.add(newOption, undefined);
+        }
+      }
+
+
+      function delItem() {
+        var outList = document.querySelector("#outList");
+        outList.remove(outList.selectedIndex);
+      }
+
+
+      function addCont() {
+        var tolist = document.querySelector("#outList");
+        var me = document.querySelector("#contactList");
+        var idx = me.selectedIndex;
+        var item = me.options[idx].value;
+        var txt = me.options[idx].text;
+        var options = tolist.options;
+        var found = false;
+
+
+        for (var counter=0; counter < options.length; counter++) {
+          if (options[counter].value == item) {
+            found = true;
+          }
+        }
+
+
+        if (!found) {
+          let newOption = document.createElement('option');
+          newOption.value = item;
+          newOption.text = txt;
+          tolist.add(newOption, undefined);
+        }
+      }
+
+
+    </script>
+    <title>Fair Acres SMS</title>
+  </head>
+  <body>
+    <div class="container m-3">
+      <h1 class="display-4">Fair Acres SMS Messenger</h1>
+      <div>Logged in as: <span class="fw-bold">{{ session['user'] }}</span></div>
+      <div class="row">
+        <div class="col-12 border border-secondary">
+          {{ nav(session['user'], session['admin']) }}
+        </div>
+        <div>&nbsp;</div>
+      </div>
+      <form action="{{ url_for('home') }}" method="POST" onsubmit="return getList()">
+      <div class="row mb-3 pb-2 border-bottom border-bottom-secondary">
+        <div class="col-3">
+          <div class="form-group">
+            <label for="inList">Select Staff</label>
+            <select class="form-control" size="6" ondblclick="heyfrom(this)" id="inList" name="inList">
+              <!--
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              -->
+              {% for user in users %}
+              <option value="{{ user.name }}">{{ user.firstname }} {{ user.lastname }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group">
+            <div class="d-grid gap-2">
+              <div>&nbsp;</div>
+              <button type="button" id="addPerson" class="btn btn-outline-primary btn-sm" onclick="addItem()">Add Staff</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="outList">User List</label>
+            <select class="form-control" size="6" ondblclick="heyto(this)" id="outList" name="outList" multiple>
+            </select>
+          </div>
+        </div>
+        <div class="col-5">
+          <div>&nbsp;</div>
+          <div class="form-control">
+            <label for="txtMessage">Type in message</label><span>&nbsp;&nbsp;Length:&nbsp;</span><span id="msgLen"></span><span>&nbsp;(max 160)</span>
+            <textarea class="form-control" rows="4" id="txtMessage" name="txtMessage" onkeyup="messageLen()"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <div class="form-group">
+            <label for="contactList">Select Residential Contacts</label>
+            <select class="form-control" size="6" ondblclick="fromcontact(this)" id="contactList" name="contactList">
+              {% for contact in contacts %}
+              <option value="{{ contact.email }}">{{ contact.firstname }} {{ contact.lastname}}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group">
+            <div class="d-grid gap-2">
+              <div>&nbsp;</div>
+              <button type="button" id="addContact" class="btn btn-outline-primary btn-sm" onclick="addCont()">Add Contact</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <div class="text-center">
+              <button type="button" id="removePerson" class="btn btn-outline-primary btn-sm" onclick="delItem()">Remove Person</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-5">
+          <div class="form-control">
+            <button class="btn btn-primary" type="submit">Send Message</button>
+          </div>
+          <div id="message">{{ msg }}</div>
+      </div>
+      </form>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
