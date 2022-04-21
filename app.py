@@ -13,8 +13,15 @@ import cred
 # the line below is required in production.
 # sys.path.insert(0, '/home/fairacresltd/sms')
 
+<<<<<<< HEAD
 app = Flask(__name__)
 
+=======
+
+app = Flask(__name__)
+
+
+>>>>>>> ed4f293 (Initialized Fairacres LTD repository for updates)
 app.secret_key = os.urandom(24)
 app.config['RECAPTCHA_SITE_KEY'] = cred.recaptcha_site_key
 app.config['RECAPTCHA_SECRET_KEY'] = cred.recaptcha_secret_key
