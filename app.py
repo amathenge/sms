@@ -153,6 +153,8 @@ def home():
         msg = "Form Posted"
         userlist = request.form.getlist('outList')
         message = request.form['txtMessage']
+        # if the message is longer than 160 chars, we can chop it up here and send it in
+        # pieces at 160 length each.
         msg = sendMessage(userlist, message)
 
 

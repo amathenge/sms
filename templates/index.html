@@ -89,6 +89,13 @@
         var mlen = txt.value.length;
         var msg = document.querySelector("#msgLen")
         msg.innerHTML = mlen.toString()
+        if (mlen > 160) {
+          txt.style.backgroundColor = 'yellow';
+          msg.style.color = 'red'
+        } else {
+          txt.style.backgroundColor = '';
+          msg.style.color = '';
+        }
       }
 
 
