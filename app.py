@@ -11,7 +11,7 @@ import sys
 from flask_recaptcha import ReCaptcha
 import cred
 # the line below is required in production.
-# sys.path.insert(0, '/home/fairacresltd/sms')
+sys.path.insert(0, '/home/fairacresltd/sms')
 
 app = Flask(__name__)
 
