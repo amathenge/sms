@@ -13,6 +13,12 @@ import cred
 # the line below is required in production.
 sys.path.insert(0, '/home/fairacresltd/sms')
 
+'''
+TODO: 
+25JUN2022: 
+add comments to the file - this is getting loosy-goosy
+'''
+
 app = Flask(__name__)
 
 app.secret_key = os.urandom(24)
