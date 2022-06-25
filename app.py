@@ -16,7 +16,7 @@ sys.path.insert(0, '/home/fairacresltd/sms')
 '''
 TODO: 
 25JUN2022: 
-add comments to the file - this is getting loosy-goosy
+add comments to the file - this is getting loosy-goosy. Also made a lot of changes to git updating.
 '''
 
 app = Flask(__name__)
