@@ -11,8 +11,8 @@ ssh key is type ecdsa-sha2-nistp256
 
 >So the commannds to load the keys are:
 ```
->eval \`ssh-agent -s\`
->ssh-add /path/to/id_ecdsa
+eval \`ssh-agent -s\`
+ssh-add /path/to/id_ecdsa
 ```
 **For Flask_Recaptcha there is a problem with Markup()**
 
@@ -33,6 +33,6 @@ Add:
 
 Your code should look like:
 ```
->    # from jinja2 import Markup
->    from markupsafe import Markup
+    # from jinja2 import Markup
+    from markupsafe import Markup
 ```
