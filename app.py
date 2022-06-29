@@ -11,14 +11,7 @@ import sys
 from flask_recaptcha import ReCaptcha
 import cred
 # the line below is required in production.
-sys.path.insert(0, '/home/fairacresltd/sms')
-
-'''
-TODO: 
-25JUN2022: 
-add comments to the file - this is getting loosy-goosy. Also made a lot of changes to git updating.
-git key is now different - check ~/.ssh/id_abcdef
-'''
+# sys.path.insert(0, '/home/fairacresltd/sms')
 
 app = Flask(__name__)
 
