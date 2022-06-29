@@ -1,3 +1,11 @@
 __pycache__/*
 cred.py
 message.db
+database.py
+.gitignore
+git-update.sh*
+passenger_wsgi.py
+public/*
+README.md
+test.py
+tmp/*
